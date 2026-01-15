@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pastry Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <!-- HEADER -->
+        <header>
+            <div class="header-top">
+                <div>
+                    <h1>My Pastry Tracker</h1>
+                    <p>Track ingredients, stay safe, get pastry ideas</p>
+                </div>
+                <button id="themeToggle" class="theme-toggle">🌙 Dark mode</button>
+            </div>
+        </header>
+
+        <!-- ADD ITEM SECTION -->
+        <section id="add-item">
+            <h2>Add pastry ingredient</h2>
+
+            <form id="itemForm">
+                <div class="field-group">
+                    <label for="name">Ingredient name</label>
+                    <input type="text" id="name" placeholder="e.g., Whipping cream" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" placeholder="e.g., 2" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="unit">Unit</label>
+                    <input type="text" id="unit" placeholder="e.g., L, kg, pcs">
+                </div>
+
+                <div class="field-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="">Choose a category</option>
+                        <option value="flour">Flour & bases</option>
+                        <option value="sugar">Sugars & sweeteners</option>
+                        <option value="filling">Fillings & creams</option>
+                        <option value="topping">Toppings & decorations</option>
+                        <option value="frozen">Frozen / prepared</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="storage">Storage</label>
+                    <select id="storage">
+                        <option value="">Select storage</option>
+                        <option value="room">Room temperature</option>
+                        <option value="fridge">Fridge</option>
+                        <option value="frozen">Freezer</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="allergens">Allergens</label>
+                    <input type="text" id="allergens" placeholder="e.g., dairy, gluten, nuts">
+                </div>
+
+                <div class="field-group">
+                    <label for="expiry">Expiry date</label>
+                    <input type="date" id="expiry">
+                </div>
+
+                <div class="field-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="isCCP">
+                        Important food safety item (CCP)
+                    </label>
+                    <small>Use for things like cream, custard, eggs, fresh dairy etc.</small>
+                </div>
+
+                <button type="submit" class="primary-btn">Add to tracker</button>
+            </form>
+        </section>
+
+        <!-- LIST SECTION -->
+        <section id="pantry-list">
+            <h2>Your pastry ingredients</h2>
+
+            <div id="controls">
+                <div class="field-group full-width">
+                    <label for="searchInput">Search</label>
+                    <input type="text" id="searchInput" placeholder="Search by name, category, allergen or CCP...">
+                </div>
+
+                <div id="sortButtons">
+                    <span class="sort-label">Sort by:</span>
+                    <button class="sort-btn" data-sort="name-asc">Name ↑</button>
+                    <button class="sort-btn" data-sort="name-desc">Name ↓</button>
+                    <button class="sort-btn" data-sort="qty">Quantity</button>
+                    <button class="sort-btn" data-sort="expiry">Expiry</button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Qty</th>
+                        <th>Unit</th>
+                        <th>Category</th>
+                        <th>Storage</th>
+                        <th>Allergens</th>
+                        <th>Expiry</th>
+                        <th>Safety</th>
+                        <th>Smart suggestion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="itemsTable"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- EDIT MODAL (compact UI) -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit ingredient</h3>
+            <form id="editForm">
+                <div class="modal-row">
+                    <input type="text" id="editName" placeholder="Ingredient name" required>
+                    <input type="number" id="editQuantity" placeholder="Qty" required>
+                    <input type="text" id="editUnit" placeholder="Unit">
+                </div>
+
+                <div class="modal-row">
+                    <select id="editCategory">
+                        <option value="flour">Flour & bases</option>
+                        <option value="sugar">Sugars & sweeteners</option>
+                        <option value="filling">Fillings & creams</option>
+                        <option value="topping">Toppings & decorations</option>
+                        <option value="frozen">Frozen / prepared</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <select id="editStorage">
+                        <option value="room">Room temperature</option>
+                        <option value="fridge">Fridge</option>
+                        <option value="frozen">Freezer</option>
+                    </select>
+                </div>
+
+                <div class="modal-row">
+                    <input type="text" id="editAllergens" placeholder="Allergens">
+                    <input type="date" id="editExpiry">
+                </div>
+
+                <div class="field-group checkbox-group modal-ccp">
+                    <label>
+                        <input type="checkbox" id="editIsCCP">
+                        Mark as CCP
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="primary-btn">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
